@@ -1,79 +1,83 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Make sure to import useNavigate
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../../config/Firebase';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Make sure to import useNavigate
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../../config/Firebase";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate(); // Initialize useNavigate hook
 
   const handleSubmit = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      alert('Successfully logged in');
-      navigate('/'); // Use navigate function to redirect
-	
+      alert("Successfully logged in");
+      navigate("/"); // Use navigate function to redirect
     } catch (e) {
       alert(e.message);
     }
   };
 
   return (
-    <div>
-      <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
-        <div className="relative py-3 sm:max-w-xl sm:mx-auto">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
-          <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
-            <div className="max-w-md mx-auto">
-              <div>
-                <h1 className="text-2xl font-semibold">Login Form with Floating Labels</h1>
-              </div>
-              <div className="divide-y divide-gray-200">
-                <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                  <div className="relative">
-                    <input
-                      autoComplete="off"
-                      id="email"
-                      name="email"
-                      type="text"
-                      className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-rose-600"
-                      placeholder="Email address"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <label
-                      htmlFor="email"
-                      className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
-                    >
-                      Email Address
-                    </label>
-                  </div>
-                  <div className="relative">
-                    <input
-                      autoComplete="off"
-                      id="password"
-                      name="password"
-                      type="password"
-                      className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-rose-600"
-                      placeholder="Password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <label
-                      htmlFor="password"
-                      className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
-                    >
-                      Password
-                    </label>
-                  </div>
-                  <div className="relative">
-                    <button onClick={handleSubmit} className="bg-blue-500 text-white rounded-md px-2 py-1">
-                      Submit
-                    </button>
-                  </div>
-                </div>
-              </div>
+    <div className="h-screen flex items-center justify-center bg-gray-800">
+      <div className="w-full max-w-md p-8 m-4 bg-gradient-to-r from-cyan-500/25 to-blue-700/25 backdrop-blur-md dark:bg-zinc-700 rounded-lg shadow-2xl">
+        <div className="p-4">
+          <h2 className="text-2xl font-semibold dark:text-white"></h2>
+          <div>
+            <div className="mt-4">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium dark:text-white"
+              >
+                Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="dark:text-gray-700 w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Email Address"
+              />
+            </div>
+            <div className="mt-4">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium dark:text-white"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="dark:text-gray-700 w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Password"
+              />
+            </div>
+
+            <div className="flex items-center mb-5 mt-4">
+              <input
+                id="remember"
+                type="checkbox"
+                className="bg-gray-50 border border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded"
+              />
+              <label
+                htmlFor="remember"
+                className="text-sm ml-2 font-medium dark:text-white"
+              >
+                Remember me
+              </label>
+            </div>
+
+            <div className="mt-6">
+              <button
+              onClick={handleSubmit}
+                className="w-full px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+              >
+                LOGIN
+              </button>
             </div>
           </div>
         </div>

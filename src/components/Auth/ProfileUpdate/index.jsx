@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import { getAuth, updateProfile } from "firebase/auth";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useAuth } from "../../../context/AuthContex";
+import {Link} from "react-router-dom";
 
 function Profile() {
   const [name, setName] = useState("");
   const [image, setImage] = useState(null);
   const [triggerReload, setTriggerReload] = useState(false);
   const [authData] = useAuth();
+
+
 
   const auth = getAuth();
 
@@ -49,7 +52,7 @@ function Profile() {
           {auth.currentUser ? (
             <img
               src={
-                authData.photoURL ||
+                authData?.photoURL ||
                 "https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg"
               }
               alt="Profile"
@@ -102,10 +105,10 @@ function Profile() {
           Save Changes
         </button>
         <button
-          className="w-2/3 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700"
-          
-          >
+          className="w-2/3 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">
+        <Link to={"/"}>
           Back
+          </Link>
         </button>
           </div>
         

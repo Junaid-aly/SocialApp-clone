@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContex";
 import { addItem } from "../../config/Firebase";
+import { useNavigate } from "react-router-dom";
 
 
 const PostItem = () => {
@@ -9,10 +10,22 @@ const PostItem = () => {
   const [user, setUser] = useState();
   const [image, setImage] = useState();
 
-  const handleSubmit = () => {
-    addItem({ image, user });
-  };
+  const navigate = useNavigate();
 
+  const handleSubmit = async () => {
+    if (user && image) {
+      try {
+        await addItem({ image, user });
+        console.log('Item added successfully');
+        window.location.reload(); // Force a page reload
+      } catch (error) {
+        console.error('Error adding post:', error);
+        alert('An error occurred while adding the post.');
+      }
+    } else {
+      alert('Please fill out all fields and select an image.');
+    }
+  };
   return (
     <>
         <div className="relative flex justify-center">

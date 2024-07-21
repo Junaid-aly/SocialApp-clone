@@ -11,14 +11,14 @@ const Navbar = () => {
     <nav className="w-full bg-white py-2 fixed top-0 z-10">
       <div className="container mx-auto flex justify-between items-center">
         <h2 className="text-2xl font-bold">MyScript</h2>
-        <div className="bg-gray-100 rounded-lg p-2 flex items-center">
-          <i className="uil uil-search" />
-          <input
-            type="search"
-            placeholder="search"
-            className="bg-transparent w-1/3 ml-4 text-sm text-gray-800 placeholder-gray-500"
-          />
-        </div>
+        <div className="bg-gray-100 rounded-lg p-2 flex items-center search">
+  <i className="uil uil-search hidden sm:block"  />
+  <input
+    type="search"
+    placeholder="search"
+    className="bg-transparent w-[300px] ml-4 text-md text-gray-800 placeholder-gray-500 hidden sm:block"
+  />
+</div>
         <div className="flex items-center gap-8">
           {authData ? (
            
