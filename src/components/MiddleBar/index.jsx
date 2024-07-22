@@ -32,7 +32,7 @@ const Middlebar = () => {
 
   return (
     <>
-      <div style={{ marginTop: "80px" }} className="middle">
+      <div style={{ marginTop: "80px" }} className="middle ">
         {/* -------------MIDDLE_SIDE ---------------- */}
         <div className="stories">
           <div className="story">
@@ -93,7 +93,7 @@ const Middlebar = () => {
         <div className="feeds">
 
 {products?.map((item) => (
-  <div key={item.id} className="feed border rounded-lg p-4 shadow-md">
+  <div key={item.id} className="feed border rounded-lg p-4 shadow-md font-bold">
     <div className="head">
       <div className="user">
         <div className="profile-picture">

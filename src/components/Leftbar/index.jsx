@@ -1,12 +1,44 @@
 import React from 'react';
 import MyImg from "../../images/my-1.jpg"
+import { Link,} from 'react-router-dom';
+import { useAuth } from '../../context/AuthContex';
+import { getAuth, signOut } from "firebase/auth";
+import ModalNotification from '../Modal';
+
 
 
 
 const LeftBar = () => {
+  const [authData] = useAuth()
+
+
+
+  const handleSignOut = () => {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        alert("Signed out successfully");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error("Error signing out: ", error);
+      });
+  };
+
   return (
-    <div className="left">
-      <a className="profile">
+    <div className="left ">
+      {authData ? (
+        <Link className="profile font-medium">
+        <div className="profile-picture">
+        <img src={authData?.photoURL}/>
+        </div>
+        <div className="handle">
+          <h4>{authData?.displayName}</h4>
+          <p className="text-muted">@{authData?.displayName}</p>
+        </div>
+      </Link>
+      ):(
+      <Link className="profile">
         <div className="profile-picture">
         <img src={MyImg} />
         </div>
@@ -14,8 +46,10 @@ const LeftBar = () => {
           <h4>junaid-aly</h4>
           <p className="text-muted">@aly</p>
         </div>
-      </a>
-      <div className="sidebar">
+      </Link>
+      )}
+      
+      <div className="sidebar  font-bold">
         <a className="menu-item active">
           <span>
             <i className="uil uil-home" />
@@ -29,15 +63,9 @@ const LeftBar = () => {
           <h3>Explore</h3>
         </a>
         <a className="menu-item" id="notifications">
-          <span>
-            <i className="uil uil-bell">
-              <small className="notificatinos-count">9+</small>
-            </i>
-          </span>
-          <h3>Notifications</h3>
-          <div className="notification-pop">
-            {/* Add notification items here */}
-          </div>
+          <ModalNotification/>
+         
+        
         </a>
         <a className="menu-item" id="messages-notification">
           <span>
@@ -65,7 +93,7 @@ const LeftBar = () => {
           </span>
           <h3>Theme</h3>
         </a>
-        <a className="menu-item active">
+        <a className="menu-item ">
           <span>
             <i className="uil uil-setting " />
           </span>
@@ -73,9 +101,21 @@ const LeftBar = () => {
 
         </a>
       </div>
-      <label htmlFor="create-post" className="btn btn-primary">
-        Create post
-      </label>
+      {authData ? (
+  <button
+    className="w-full bg-slate-900 text-2lg text-white py-2 px-4 rounded-lg hover:bg-red-600  transition-all duration-300 mt-4"
+    onClick={handleSignOut}
+  >
+    Logout
+  </button>
+) : (
+  <Link to={"/login"}>
+    <button className="w-full bg-blue-900 text-lg text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-all duration-300 mt-4">
+      Log_in
+    </button>
+  </Link>
+)}
+
     </div>
   );
 }

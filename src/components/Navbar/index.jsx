@@ -8,18 +8,18 @@ import PostItem from "../CreatePost";
 const Navbar = () => {
   const [authData] = useAuth();
   return (
-    <nav className="w-full bg-white py-2 fixed top-0 z-10">
+    <nav className="w-full bg-white py-2 fixed top-0 z-10 nav">
       <div className="container mx-auto flex justify-between items-center">
-        <h2 className="text-2xl font-bold">MyScript</h2>
+        <h2 className="text-2xl font-bold"><i className="uil uil-facebook"></i>_J</h2>
         <div className="bg-gray-100 rounded-lg p-2 flex items-center search">
-  <i className="uil uil-search hidden sm:block"  />
+  <i className="uil uil-search hidden sm:block md:hidden"  />
   <input
     type="search"
     placeholder="search"
     className="bg-transparent w-[300px] ml-4 text-md text-gray-800 placeholder-gray-500 hidden sm:block"
   />
 </div>
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-6">
           {authData ? (
            
               <PostItem />

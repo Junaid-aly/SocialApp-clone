@@ -11,7 +11,7 @@ const Rightbar = () => {
   return (
     <div>
       <div className="right" style={{marginTop:"90px"}}>
-        <div className="messages">
+        <div className="messages font-bold">
           <div className="heading">
             <h4>Messages</h4>
             <i className="uil uil-edit" />
