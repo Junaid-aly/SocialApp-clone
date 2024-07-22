@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../../context/AuthContex";
 import { addItem } from "../../config/Firebase";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const PostItem = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,19 +11,20 @@ const PostItem = () => {
   const [image, setImage] = useState();
 
   const navigate = useNavigate();
-
+  const userName = authData && authData.displayName
+  const userImage = authData && authData.photoURL
   const handleSubmit = async () => {
-    if (user && image) {
+    if (userName && image) {
       try {
-        await addItem({ image, user });
-        console.log("Item added successfully");
+        await addItem({ image, userName,userImage });
+        toast.success("Item added successfully");
         window.location.reload(); // Force a page reload
       } catch (error) {
         console.error("Error adding post:", error);
-        alert("An error occurred while adding the post.");
+        toast.error("An error occurred while adding the post.");
       }
     } else {
-      alert("Please fill out all fields and select an image.");
+      toast.error("Please fill out all fields and select an image.");
     }
   };
   return (
@@ -69,9 +71,9 @@ const PostItem = () => {
                       <input
                         name="user"
                         type="text"
-                        value={user}
+                        value={userName}
                         placeholder="Name"
-                        onChange={(e) => setUser(e.target.value)}
+                        onChange={(e) => setUser({userName})}
                         className="block w-full px-4 py-3 text-sm text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
                       />
                     </label>

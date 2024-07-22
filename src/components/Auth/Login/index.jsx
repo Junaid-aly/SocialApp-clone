@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Make sure to import useNavigate
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../config/Firebase";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,10 +12,10 @@ const Login = () => {
   const handleSubmit = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      alert("Successfully logged in");
+      // alert("Successfully logged in");
       navigate("/"); // Use navigate function to redirect
     } catch (e) {
-      alert(e.message);
+      toast.error(e.message);
     }
   };
 

@@ -30,7 +30,11 @@ const LeftBar = () => {
       {authData ? (
         <Link className="profile font-medium">
         <div className="profile-picture">
-        <img src={authData?.photoURL}/>
+        <img   
+         src={
+            authData?.photoURL ||
+            'https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png'
+          }/>
         </div>
         <div className="handle">
           <h4>{authData?.displayName}</h4>

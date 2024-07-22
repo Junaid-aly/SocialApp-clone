@@ -3,6 +3,7 @@ import { getAuth, updateProfile } from "firebase/auth";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useAuth } from "../../../context/AuthContex";
 import {Link} from "react-router-dom";
+import toast from "react-hot-toast";
 
 function Profile() {
   const [name, setName] = useState("");
@@ -35,11 +36,11 @@ function Profile() {
       photoURL,
     })
       .then(() => {
-        alert("Profile updated");
+        toast.success("Profile updated");
         setTriggerReload(!triggerReload);
       })
       .catch((error) => {
-        alert("Error updating profile: " + error.message);
+        toast.promise("Error updating profile: " + error.message);
       });
   };
 
@@ -51,8 +52,9 @@ function Profile() {
       <div className="mb-4 flex flex-col items-center">
         <img
           src={
+            
             authData?.photoURL ||
-            'https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg'
+            'https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png'
           }
           alt="Profile"
           className="rounded-full w-28 h-28 object-cover"

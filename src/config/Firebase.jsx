@@ -16,6 +16,7 @@ import {
   doc,
 } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import toast from "react-hot-toast";
 
 
 const firebaseConfig = {
@@ -47,9 +48,9 @@ export async function register(userinfo) {
       name,
       email,
     });
-    alert("Successfully Register");
+    toast.success("Successfully Register");
   } catch (e) {
-    alert(e.message);
+    toast.error(e.message);
   }
 }
 // ------- REGISTER FUN END -------- //
@@ -61,7 +62,7 @@ export async function login(userinfo) {
   try {
     const { email, password } = userinfo;
     await signInWithEmailAndPassword(auth, email, password);
-    alert("Successfully logged");
+    toast.success("Successfully logged");
     // Navigate("/");
   } catch (e) {
     alert(e.message);
@@ -77,18 +78,20 @@ export async function login(userinfo) {
 
 export async function addItem(data) {
   try {
-    const { image, user } = data;
+    const { image, userName, userImage } = data;
     
     const storageRef = ref(storage, `posts/${image.name}`);
     await uploadBytes(storageRef, image);
     const imgUrl = await getDownloadURL(storageRef);
     
     const docRef = await addDoc(collection(db, "posts"), {
-      user: user,
+      userName: userName,
       image: imgUrl,
       createdAt: new Date(),
+      userImage: userImage,
+
     });
-    alert(' Added Post Successfully')
+    // toast.success(' Added Post Successfully')
     return docRef.id; 
   } catch (e) {
     throw new Error(e.message);

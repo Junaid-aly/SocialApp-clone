@@ -3,6 +3,7 @@ import { useAuth } from "../../context/AuthContex";
 import MyImg from "../../images/my-1.jpg";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
+import toast from "react-hot-toast";
 
 const User = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +18,7 @@ const User = () => {
     const auth = getAuth();
     signOut(auth)
       .then(() => {
-        alert("Signed out successfully");
+        toast.success("Signed out successfully");
         navigate("/");
       })
       .catch((error) => {
@@ -55,9 +56,9 @@ const User = () => {
               href="#"
               className="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
             >
-              <img
+              <img 
                 className="flex-shrink-0 object-cover mx-1 text-center rounded-full w-10 h-10 sm:w-12 sm:h-12"
-                src={authData?.photoURL || MyImg}
+                src={authData?.photoURL ||  "https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png"}
               />
               <div className="mx-1">
                 <h1 className="text-sm font-semibold text-gray-700 dark:text-gray-200">

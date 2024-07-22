@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { register } from '../../../config/Firebase';
 import { Link } from 'react-router-dom';
 import Myimg from "../../../images/bg-2.jpg"
+import toast from 'react-hot-toast';
 
 const Register = () => {
   const [name, setName] = useState();
@@ -14,7 +15,7 @@ const Register = () => {
     if (name && email && password) {
       register({ name, email, password });
     } else {
-      alert('Please fill out all fields.');
+     toast.promise('Please fill out all fields.');
     }
   };
 
@@ -76,9 +77,11 @@ const Register = () => {
             >
               Sign Up
             </button>
+              <Link to="/login">
             <button className="w-full mt-5 bg-blue-500 hover:bg-blue-700 shadow-xl text-white uppercase text-sm font-semibold px-4 py-3 rounded">
-              <Link to="/login">Login</Link>
+            Login
             </button>
+              </Link>
           </div>
         </div>
       </div>

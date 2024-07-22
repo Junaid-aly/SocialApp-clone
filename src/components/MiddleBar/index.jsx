@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import MyImg from "../../images/my-1.jpg";
 import MyImg2 from "../../images/my-2.jpg";
 import Shahzaib from "../../images/shahzaib.jpg";
@@ -13,8 +12,12 @@ import Arslan from "../../images/arslan.jpg";
 import Kashif from "../../images/kashif.jpg";
 import { getAds } from "../../config/Firebase";
 
+import { useAuth } from "../../context/AuthContex" 
+
 const Middlebar = () => {
   const [products, setProducts] = useState([])
+ const [authData] = useAuth()
+//  console.log(authData,"user data ")
 
 
   useEffect(() => {
@@ -97,10 +100,10 @@ const Middlebar = () => {
     <div className="head">
       <div className="user">
         <div className="profile-picture">
-          <img src={item.image|| 'defaultProfilePictureURL'} alt={`Profile of ${item.user || 'Unknown User'}`} />
+          <img src={item?.userImage || 'defaultProfilePictureURL'} alt={`Profile of ${item.user || 'Unknown User'}`} />
         </div>
         <div className="info">
-          <h3>{item.user || 'Unknown User'}</h3>
+          <h3>{item?.userName || 'Unknown User'}</h3>
           <small> {item.createdAt}</small>
         </div>
       </div>
